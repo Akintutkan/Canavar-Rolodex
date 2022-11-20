@@ -21,7 +21,7 @@ class App extends Component{ //fonksiyonelliğini genişlet ve app'i class compo
       <div key={canavar.name}>
       <h1>{canavar.name}</h1>
     </div>
-    )}
+    )})}
     </div>
   );
 }
