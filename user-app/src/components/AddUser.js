@@ -1,27 +1,39 @@
 import React, { Component } from "react";
 
 class AddUser extends Component {
-    state = {
-        name: "",
-        email: ""
-    }
-    onNameChange(e){
-        this.setState({
-            [e.target.name] : e.target.value
-        })
-    }
-    onEmailChange(e){
-        this.setState({
-            [e.target.name] : e.target.value
-        })
-    }
+  state = {
+    name: "",
+    email: "",
+  };
+  onNameChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
+  onEmailChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
+  onAddSubmit(e) {
+    console.log("Form Submit")
+    const { addUser } = this.props;
+    const { name, email } = this.state;
+    const newUser = {
+      id: (Math.random() * 10).toFixed(),
+      name: name,
+      email: email,
+    };
+    addUser(newUser);
+    e.preventDefault();
+  }
   render() {
-    const {name, email} = this.state
+    const { name, email } = this.state;
     return (
       <div className="card">
         <h4 className="card-header"> Add New User</h4>
         <div className="card-body">
-          <form onSubmit ={this.onAddSubmit.bind(this)}>
+          <form onSubmit={this.onAddSubmit.bind(this)}>
             <div className="form-group">
               <label htmlFor="name"> Name: </label>
               <input
@@ -29,9 +41,9 @@ class AddUser extends Component {
                 name="name"
                 placeholder="Enter Name"
                 id="name"
-                clasName="form-control"
+                className="form-control"
                 value={name}
-                onChange = {this.onNameChange.bind(this)}
+                onChange={this.onNameChange.bind(this)}
               />
             </div>
             <div className="form-group">
@@ -41,13 +53,14 @@ class AddUser extends Component {
                 name="email"
                 placeholder="Enter Email"
                 id="email"
-                clasName="form-control"
-              value={email}
-              onChange = {this.onEmailChange.bind(this)}
-
+                className="form-control"
+                value={email}
+                onChange={this.onEmailChange.bind(this)}
               />
             </div>
-            <button type="submit" className="btn btn-danger btn-block">Add New User</button>
+            <button type="submit" className="btn btn-danger btn-block">
+              Add New User
+            </button>
           </form>
         </div>
       </div>
