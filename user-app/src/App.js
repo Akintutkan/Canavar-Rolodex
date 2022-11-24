@@ -4,28 +4,26 @@ import Users from './components/Users';
 class App extends Component{
   constructor(){
     super()
-
     this.state = {
-      users: [
-{
-  id:1,
-  name: 'Ahmet Akın Tutkan',
-  email: "akin.tutkan@gmail.com"
-},
-{
-  id:2,
-  name:"Mehmet Tutum",
-  email: "mehmet.tutum@gmail.com"
-},
-{
-  id:3,
-  name:"Burak Ay",
-  email: "burak.ay@gmail.com"
-}
-      ]
+      users: []
     }
     this.deleteUser = this.deleteUser.bind(this);
     this.addUser = this.addUser.bind(this);
+  }
+  componentDidMount() { // başlangıç state değeri var sonra component did mount ile bağlandı
+    //console.log("ComponentDİd")
+    fetch(`https://jsonplaceholder.typicode.com/users`)
+      .then((res) => res.json()) //index.js react strict mode silinirse çift konsol ortadan kalkar
+      .then((users) =>
+        this.setState(
+          () => {
+            return { users };
+          },
+          () => {
+            console.log(this.state);
+          }
+        )
+      );
   }
   addUser(newUser){
     let updatedUsers = this.state.users;

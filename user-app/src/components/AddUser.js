@@ -18,9 +18,14 @@ class AddUser extends Component {
   onAddSubmit(e) {
     console.log("Form Submit")
     const { addUser } = this.props;
-    const { name, email } = this.state;
+    const { name, email} = this.state;
+    function getRandomInteger(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
     const newUser = {
-      id: (Math.random() * 10).toFixed(),
+      id: getRandomInteger(10,50),
       name: name,
       email: email,
     };
@@ -28,7 +33,7 @@ class AddUser extends Component {
     e.preventDefault();
   }
   render() {
-    const { name, email } = this.state;
+    const { name, email} = this.state;
     return (
       <div className="card">
         <h4 className="card-header"> Add New User</h4>
